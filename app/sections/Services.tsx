@@ -23,7 +23,6 @@ gsap.registerPlugin(ScrollTrigger);
 const services = [
   // Security & Protection
   { icon: ShieldCheck, text: "Antivirus installation & protection" },
-  { icon: Lock, text: "Firewall setup & security configuration" },
   { icon: AlertTriangle, text: "Virus removal & system cleanup" },
 
   // Connectivity & Network
@@ -44,6 +43,8 @@ const services = [
   { icon: Wrench, text: "On-site & remote IT support" },
   { icon: RefreshCw, text: "Regular maintenance & updates" },
   { icon: Clock, text: "Annual maintenance contracts (AMC)" },
+
+  { icon: Lock, text: "Firewall setup & security configuration" },
 ];
 
 export default function Services() {

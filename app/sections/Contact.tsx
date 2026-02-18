@@ -1,7 +1,17 @@
 import { useRef, useLayoutEffect, useState } from "react";
 import { gsap } from "gsap";
+import ReCAPTCHA from "react-google-recaptcha";
+import axios from "axios";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Send, Mail, MapPin, Clock } from "lucide-react";
+import {
+  Send,
+  Mail,
+  MapPin,
+  Phone,
+  MessageCircle,
+  Loader2,
+} from "lucide-react";
+import { Toast } from "../lib/toast";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,19 +21,78 @@ export default function Contact() {
   const copyRef = useRef<HTMLParagraphElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const detailsRef = useRef<HTMLDivElement>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     company: "",
+    phone_number: "",
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert(
-      "Thank you for your message! We will get back to you within 24 hours.",
-    );
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    try {
+      event.preventDefault();
+      if (!captchaToken) {
+        Toast.error("Please complete the reCAPTCHA");
+        return;
+      }
+
+      setIsLoading(true);
+      const formSData = {
+        name: formData.name,
+        email: formData.email,
+        company: formData.company,
+        message: formData.message,
+        phone_number: formData.phone_number,
+        token: captchaToken,
+      };
+      const res = await axios.post("/api/contact", formSData, {
+        headers: { "Content-Type": "application/json" },
+        validateStatus: () => true,
+      });
+
+      switch (res.status) {
+        case 200:
+          Toast.success(
+            "Thank you for reaching out. Our team will get back to you as soon as possible.",
+            { duration: 5000 },
+          );
+          resetForm();
+          setIsLoading(false);
+          break;
+
+        case 400:
+          Toast.error(res.data?.error || "Bad Request");
+          setIsLoading(false);
+          break;
+
+        default:
+          Toast.error("Something went wrong, Please try again later!");
+          setIsLoading(false);
+      }
+    } catch (error) {
+      Toast.error("Network error, please try again later!");
+    }
+  };
+
+  const refreshCaptcha = () => {
+    recaptchaRef.current?.reset();
+    setCaptchaToken(null);
+  };
+
+  const resetForm = () => {
+    setFormData({
+      name: "",
+      email: "",
+      company: "",
+      message: "",
+      phone_number: "",
+    });
+    refreshCaptcha();
   };
 
   useLayoutEffect(() => {
@@ -134,7 +203,7 @@ export default function Contact() {
           {/* Copy */}
           <p
             ref={copyRef}
-            className="text-base md:text-lg text-devika-text-secondary mb-8 md:mb-10"
+            className="text-base md:text-lg text-devika-text-secondary mb-8 md:mb-5"
           >
             Tell us what you're shipping. We will reply within 24 hours.
           </p>
@@ -179,6 +248,22 @@ export default function Contact() {
 
             <div className="form-field">
               <label className="font-mono-label text-devika-text-secondary block mb-2 text-xs">
+                Phone number
+              </label>
+              <input
+                type="phone_number"
+                value={formData.phone_number}
+                onChange={(e) =>
+                  setFormData({ ...formData, phone_number: e.target.value })
+                }
+                className="w-full bg-transparent border border-devika-text/20 px-4 py-3 text-devika-text focus:border-devika-accent focus:outline-none transition-colors text-sm md:text-base"
+                placeholder="+44 12345 67890"
+                required
+              />
+            </div>
+
+            <div className="form-field">
+              <label className="font-mono-label text-devika-text-secondary block mb-2 text-xs">
                 Company
               </label>
               <input
@@ -202,18 +287,32 @@ export default function Contact() {
                   setFormData({ ...formData, message: e.target.value })
                 }
                 className="w-full bg-transparent border border-devika-text/20 px-4 py-3 text-devika-text focus:border-devika-accent focus:outline-none transition-colors resize-none text-sm md:text-base"
-                rows={5}
+                rows={2}
                 placeholder="Tell us about your project..."
                 required
               />
             </div>
-
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+              onChange={(token) => setCaptchaToken(token)}
+            />
             <button
               type="submit"
-              className="btn-primary flex items-center gap-2 group w-full md:w-auto justify-center"
+              disabled={isLoading}
+              className="btn-primary group w-full md:w-auto justify-center disabled:opacity-50"
             >
-              Send message
-              <Send className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              {isLoading ? (
+                <div className="flex items-center gap-2">
+                  Sending message
+                  <Loader2 className="w-4 h-4 animate-spin mx-auto" />
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  Send message
+                  <Send className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </div>
+              )}
             </button>
           </form>
         </div>
@@ -242,9 +341,45 @@ export default function Contact() {
                 <span className="font-mono-label text-devika-text-secondary block mb-1 text-xs">
                   Location
                 </span>
-                <p className="text-devika-text text-sm md:text-base">
+                <a
+                  href="https://maps.app.goo.gl/tQfUVu7EeuajWqih7"
+                  target="_blank"
+                  className="text-devika-text text-sm md:text-base"
+                >
                   South Wales, UK
-                </p>
+                </a>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <Phone className="w-5 h-5 text-devika-accent mt-1 shrink-0" />
+              <div>
+                <span className="font-mono-label text-devika-text-secondary block mb-1 text-xs">
+                  Phone
+                </span>
+                <a
+                  href="tel:+447356266915"
+                  target="_blank"
+                  className="text-devika-text text-sm md:text-base"
+                >
+                  +44 73 5626 6915
+                </a>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <MessageCircle className="w-5 h-5 text-devika-accent mt-1 shrink-0" />
+              <div>
+                <span className="font-mono-label text-devika-text-secondary block mb-1 text-xs">
+                  Whats app
+                </span>
+                <a
+                  href="https://wa.me/+447356266915"
+                  target="_blank"
+                  className="text-devika-text text-sm md:text-base"
+                >
+                  +44 73 5626 6915
+                </a>
               </div>
             </div>
           </div>
@@ -263,20 +398,6 @@ export default function Contact() {
             © {new Date().getFullYear()} Devika Systems Ltd. All rights
             reserved.
           </p>
-          <div className="flex items-center gap-4 md:gap-6">
-            {/* <a
-              href="#"
-              className="text-devika-text-secondary hover:text-devika-text transition-colors text-xs md:text-sm"
-            >
-              Privacy
-            </a>
-            <a
-              href="#"
-              className="text-devika-text-secondary hover:text-devika-text transition-colors text-xs md:text-sm"
-            >
-              Terms
-            </a> */}
-          </div>
         </div>
       </footer>
     </section>

@@ -132,7 +132,7 @@ export default function Navigation() {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 z-99 bg-devika-bg transition-all duration-300 lg:hidden ${
+        className={`fixed inset-0 z-99 bg-black transition-all duration-300 lg:hidden ${
           menuOpen
             ? "opacity-100 visible"
             : "opacity-0 invisible pointer-events-none"

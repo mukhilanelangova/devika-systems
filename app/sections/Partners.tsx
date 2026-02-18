@@ -5,7 +5,7 @@ import { Quote } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const testimonials = [
+const partners = [
   {
     quote:
       "Devika's attention to detail is totally on point with our brief. Fast, reliable and good value. <br/> <br/>Creating solutions and delivering in one cohesive and intuitive package. <br/> <br/> Able to listen, understand and implement a brief efficiently, effectively and affordably.",
@@ -96,7 +96,7 @@ export default function Testimonials() {
 
       {/* Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-        {testimonials.map((testimonial, index) => (
+        {partners.map((eachPartner, index) => (
           <div
             key={index}
             ref={(el) => {
@@ -107,15 +107,15 @@ export default function Testimonials() {
             <div>
               <Quote className="w-6 h-6 md:w-8 md:h-8 text-devika-accent mb-4 md:mb-6 opacity-60" />
               <div className="text-devika-text leading-relaxed mb-6 md:mb-8 text-sm md:text-base">
-                <div dangerouslySetInnerHTML={{ __html: testimonial.quote }} />
+                <div dangerouslySetInnerHTML={{ __html: eachPartner.quote }} />
               </div>
             </div>
             <div>
               <p className="font-heading font-semibold text-devika-text text-sm md:text-base">
-                {testimonial.name}
+                {eachPartner.name}
               </p>
               <p className="font-mono-label text-devika-text-secondary mt-1 text-xs">
-                {testimonial.company}
+                {eachPartner.company}
               </p>
             </div>
           </div>
