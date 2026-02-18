@@ -205,7 +205,7 @@ export default function Contact() {
             ref={copyRef}
             className="text-base md:text-lg text-devika-text-secondary mb-8 md:mb-5"
           >
-            Drop us a line, we reply you as soon as possible.
+            Drop us a line. We will reply you as soon as possible.
           </p>
 
           {/* Form */}

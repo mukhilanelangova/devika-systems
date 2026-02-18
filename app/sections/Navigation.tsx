@@ -98,7 +98,7 @@ export default function Navigation() {
               <button
                 key={index}
                 onClick={() => scrollToSection(item.href)}
-                className="text-devika-text-secondary hover:text-devika-text transition-colors text-lg font-semibold"
+                className="text-devika-text-secondary hover:text-devika-text hover:cursor-pointer transition-colors text-lg font-semibold"
               >
                 {item.label}
               </button>
