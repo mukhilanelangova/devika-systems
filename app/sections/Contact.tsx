@@ -205,7 +205,7 @@ export default function Contact() {
             ref={copyRef}
             className="text-base md:text-lg text-devika-text-secondary mb-8 md:mb-5"
           >
-            Tell us what you're shipping. We will reply within 24 hours.
+            Drop us a line, we reply you as soon as possible.
           </p>
 
           {/* Form */}

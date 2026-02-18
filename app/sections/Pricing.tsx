@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const packages = [
   {
-    name: "Project Sprint",
+    name: "Esset",
     price: "From £18k",
     description: "Discovery + MVP in 8-10 weeks.",
     features: [
@@ -19,7 +19,7 @@ const packages = [
     featured: false,
   },
   {
-    name: "Retained Team",
+    name: "Jump Cloud",
     price: "From £6.5k/mo",
     description: "Design + dev support each month.",
     features: [
@@ -182,7 +182,7 @@ export default function Pricing() {
     <section
       ref={sectionRef}
       id="pricing"
-      className={`relative bg-devika-bg z-80 ${isMobile ? "py-20" : "section-pinned"}`}
+      className={`relative bg-devika-bg z-80 ${isMobile ? "pt-40" : "section-pinned"}`}
     >
       <div
         className={`${isMobile ? "flex flex-col" : "absolute inset-0 flex"}`}
@@ -190,23 +190,15 @@ export default function Pricing() {
         {/* Content Area */}
         <div
           ref={contentRef}
-          className={`${isMobile ? "w-full px-6 py-12 order-2" : "absolute left-0 top-0 w-[44vw] h-full flex flex-col justify-center px-[8vw]"}`}
+          className={`${isMobile ? "w-full px-6 py-12 order-2" : "absolute left-0 top-0 w-[44vw] h-full flex flex-col justify-center px-[8vw] mt-20"}`}
         >
           {/* Headline */}
           <h2
             ref={headlineRef}
             className="font-heading text-3xl sm:text-4xl md:text-h2 font-semibold text-devika-text mb-4 leading-none"
           >
-            Pricing that scales with you.
+            Partnered with
           </h2>
-
-          {/* Body */}
-          <p
-            ref={bodyRef}
-            className="text-base md:text-lg text-devika-text-secondary max-w-full md:max-w-[30vw] mb-6 md:mb-8 leading-relaxed"
-          >
-            Fixed scopes or retained teams—predictable budgets, no surprises.
-          </p>
 
           {/* Packages */}
           <div className="space-y-4 mb-6 md:mb-8">
@@ -243,15 +235,6 @@ export default function Pricing() {
               </div>
             ))}
           </div>
-
-          {/* CTA */}
-          <button
-            ref={ctaRef}
-            className="btn-primary w-fit flex items-center gap-2 group"
-          >
-            Get a detailed quote
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </button>
         </div>
 
         {/* Hairline Divider - Desktop only */}
