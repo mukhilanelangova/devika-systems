@@ -1,7 +1,8 @@
 import { useRef, useLayoutEffect, useEffect, useState } from "react";
+import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, Search, PenTool, Code2, Rocket } from "lucide-react";
+import { ArrowRight, Search, ShieldCheck, Headphones, TrendingUp } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -9,26 +10,26 @@ const steps = [
   {
     number: "01",
     icon: Search,
-    title: "Discover & scope",
-    description: "Map the problem, users, and constraints.",
+    title: "Assess & plan",
+    description: "Audit your IT environment, identify risks, and build a tailored roadmap.",
   },
   {
     number: "02",
-    icon: PenTool,
-    title: "Design the experience",
-    description: "Wireframes to polished UI, validated early.",
+    icon: ShieldCheck,
+    title: "Onboard & secure",
+    description: "Deploy monitoring agents, configure security tools, and document your infrastructure.",
   },
   {
     number: "03",
-    icon: Code2,
-    title: "Build & integrate",
-    description: "Clean architecture, real data, rigorous testing.",
+    icon: Headphones,
+    title: "Monitor & support",
+    description: "24/7 proactive monitoring, rapid incident response, and remote helpdesk support.",
   },
   {
     number: "04",
-    icon: Rocket,
-    title: "Launch & improve",
-    description: "Deploy, monitor, iterate with metrics.",
+    icon: TrendingUp,
+    title: "Review & optimise",
+    description: "Quarterly reviews, patch management, and strategic IT planning to keep you ahead.",
   },
 ];
 
@@ -192,12 +193,14 @@ export default function Process() {
         {/* Image Panel */}
         <div
           ref={imageRef}
-          className={`${isMobile ? "w-full h-[40vh]" : "absolute left-0 top-0 w-[56vw] h-full"} overflow-hidden`}
+          className={`${isMobile ? "relative w-full h-[40vh]" : "absolute left-0 top-0 w-[56vw] h-full"} overflow-hidden`}
         >
-          <img
+          <Image
+            fill
             src="/website/process_meeting_table.jpg"
-            alt="Team Meeting"
-            className="w-full h-full object-cover image-grade"
+            alt="Devika Systems IT onboarding and service review meeting"
+            className="object-cover image-grade"
+            sizes="(max-width: 1024px) 100vw, 56vw"
           />
         </div>
 

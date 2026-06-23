@@ -95,25 +95,27 @@ export default function Navigation() {
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center gap-8">
             {menuItems.map((item, index) => (
-              <button
+              <a
                 key={index}
-                onClick={() => scrollToSection(item.href)}
+                href={item.href}
+                onClick={(e) => { e.preventDefault(); scrollToSection(item.href); }}
                 className="text-devika-text-secondary hover:text-devika-text hover:cursor-pointer transition-colors text-lg font-semibold"
               >
                 {item.label}
-              </button>
+              </a>
             ))}
           </div>
 
           {/* CTA + Mobile Menu Button */}
           <div className="flex items-center gap-4">
-            <button
-              onClick={() => scrollToSection("#contact")}
+            <a
+              href="#contact"
+              onClick={(e) => { e.preventDefault(); scrollToSection("#contact"); }}
               className="hidden md:flex btn-primary text-sm items-center gap-2 group"
             >
               Start a project
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </button>
+            </a>
 
             <button
               onClick={() => setMenuOpen(!menuOpen)}
@@ -140,21 +142,23 @@ export default function Navigation() {
       >
         <div className="flex flex-col items-center justify-center h-full gap-6 pt-20">
           {menuItems.map((item, index) => (
-            <button
+            <a
               key={index}
-              onClick={() => scrollToSection(item.href)}
+              href={item.href}
+              onClick={(e) => { e.preventDefault(); scrollToSection(item.href); }}
               className="font-heading text-2xl md:text-3xl text-devika-text hover:text-devika-accent transition-colors py-2"
             >
               {item.label}
-            </button>
+            </a>
           ))}
-          <button
-            onClick={() => scrollToSection("#contact")}
+          <a
+            href="#contact"
+            onClick={(e) => { e.preventDefault(); scrollToSection("#contact"); }}
             className="btn-primary mt-6 flex items-center gap-2 group"
           >
             Start a project
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </button>
+          </a>
         </div>
       </div>
     </>

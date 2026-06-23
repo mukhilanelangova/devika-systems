@@ -5,6 +5,7 @@ import {
   useState,
   useCallback,
 } from "react";
+import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, ChevronRight } from "lucide-react";
@@ -203,12 +204,15 @@ export default function Hero() {
         {/* Image Panel */}
         <div
           ref={imageRef}
-          className={`${isMobile ? "w-full h-[50vh]" : "absolute left-0 top-0 w-[56vw] h-full"} overflow-hidden`}
+          className={`${isMobile ? "relative w-full h-[50vh]" : "absolute left-0 top-0 w-[56vw] h-full"} overflow-hidden`}
         >
-          <img
+          <Image
+            fill
             src="/website/hero_team_office.jpg"
-            alt="Devika Systems Team"
-            className="w-full h-full object-cover image-grade"
+            alt="Devika Systems managed IT team in South Wales office"
+            className="object-cover image-grade"
+            sizes="(max-width: 1024px) 100vw, 56vw"
+            priority
           />
           <div className="absolute inset-0 bg-linear-to-r from-transparent to-devika-bg/20" />
         </div>

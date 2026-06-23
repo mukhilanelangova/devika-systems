@@ -5,6 +5,7 @@ import {
   useState,
   useCallback,
 } from "react";
+import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight } from "lucide-react";
@@ -218,9 +219,7 @@ export default function Capabilities() {
             ref={headlineRef}
             className="font-heading text-3xl sm:text-4xl md:text-h2 font-semibold text-devika-text mb-6 leading-none"
           >
-            Modern stacks.
-            <br />
-            Real-world results.
+            End-to-end IT capabilities.
           </h2>
 
           {/* Body */}
@@ -263,12 +262,14 @@ export default function Capabilities() {
         {/* Image Panel */}
         <div
           ref={imageRef}
-          className={`${isMobile ? "w-full h-[40vh] order-1" : "absolute left-[44vw] top-0 w-[56vw] h-full"} overflow-hidden`}
+          className={`${isMobile ? "relative w-full h-[40vh] order-1" : "absolute left-[44vw] top-0 w-[56vw] h-full"} overflow-hidden`}
         >
-          <img
+          <Image
+            fill
             src="/website/capabilities_coding_screen.jpg"
-            alt="Code Development"
-            className="w-full h-full object-cover image-grade"
+            alt="Managed IT capabilities including cloud infrastructure and endpoint security"
+            className="object-cover image-grade"
+            sizes="(max-width: 1024px) 100vw, 56vw"
           />
         </div>
       </div>

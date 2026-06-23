@@ -251,7 +251,7 @@ export default function Contact() {
                 Phone number
               </label>
               <input
-                type="phone_number"
+                type="tel"
                 value={formData.phone_number}
                 onChange={(e) =>
                   setFormData({ ...formData, phone_number: e.target.value })
@@ -386,20 +386,6 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="mt-16 md:mt-24 pt-6 md:pt-8 border-t border-devika-text/10">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2">
-            <span className="font-heading font-bold text-devika-text text-lg md:text-xl">
-              DEVIKA
-            </span>
-          </div>
-          <p className="text-devika-text-secondary text-xs md:text-sm text-center">
-            © {new Date().getFullYear()} Devika Systems Ltd. All rights
-            reserved.
-          </p>
-        </div>
-      </footer>
     </section>
   );
 }

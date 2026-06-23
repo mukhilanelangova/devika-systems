@@ -1,4 +1,5 @@
 import { useRef, useLayoutEffect, useEffect, useState } from "react";
+import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight } from "lucide-react";
@@ -179,12 +180,14 @@ export default function About() {
         {/* Image Panel */}
         <div
           ref={imageRef}
-          className={`${isMobile ? "w-full h-[40vh]" : "absolute left-0 top-0 w-[56vw] h-full"} overflow-hidden`}
+          className={`${isMobile ? "relative w-full h-[40vh]" : "absolute left-0 top-0 w-[56vw] h-full"} overflow-hidden`}
         >
-          <img
+          <Image
+            fill
             src="/website/about_team_portrait.jpg"
-            alt="Devika Team"
-            className="w-full h-full object-cover image-grade"
+            alt="Devika Systems Ltd team — UK managed IT services provider"
+            className="object-cover image-grade"
+            sizes="(max-width: 1024px) 100vw, 56vw"
           />
         </div>
 

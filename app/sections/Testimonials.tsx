@@ -18,11 +18,6 @@ const testimonials = [
     name: "",
     company: "Fintech Startup",
   },
-  {
-    quote: "and many more...",
-    // name: "Design Director",
-    // company: "Retail Brand",
-  },
 ];
 
 export default function Testimonials() {

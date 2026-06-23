@@ -1,4 +1,5 @@
 import { useRef, useLayoutEffect, useEffect, useState } from "react";
+import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
@@ -229,12 +230,14 @@ export default function Services() {
         {/* Image Panel */}
         <div
           ref={imageRef}
-          className={`${isMobile ? "w-full h-[40vh] order-1" : "absolute left-[44vw] top-0 w-[56vw] h-full"} overflow-hidden`}
+          className={`${isMobile ? "relative w-full h-[40vh] order-1" : "absolute left-[44vw] top-0 w-[56vw] h-full"} overflow-hidden`}
         >
-          <img
+          <Image
+            fill
             src="/website/services_laptop_detail.jpg"
-            alt="Software Development"
-            className="w-full h-full object-cover image-grade"
+            alt="Devika Systems IT support and managed services technician"
+            className="object-cover image-grade"
+            sizes="(max-width: 1024px) 100vw, 56vw"
           />
         </div>
       </div>

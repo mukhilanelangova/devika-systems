@@ -122,6 +122,15 @@ function Home() {
         {/* Section 9: Contact - pin: false */}
         <Contact />
       </main>
+
+      <footer className="bg-devika-bg px-4 md:px-[8vw] py-6 md:py-8 border-t border-devika-text/10">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <span className="font-heading font-bold text-devika-text text-lg md:text-xl">DEVIKA</span>
+          <p className="text-devika-text-secondary text-xs md:text-sm text-center">
+            © {new Date().getFullYear()} Devika Systems Ltd. All rights reserved.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }

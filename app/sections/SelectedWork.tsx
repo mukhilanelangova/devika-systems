@@ -1,4 +1,5 @@
 import { useRef, useLayoutEffect } from "react";
+import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ExternalLink } from "lucide-react";
@@ -245,10 +246,12 @@ export default function SelectedWork() {
           >
             {/* Image */}
             <div className="case-image relative w-full lg:w-[58vw] h-[35vh] md:h-[50vh] lg:h-[72vh] overflow-hidden">
-              <img
+              <Image
+                fill
                 src={caseItem.image}
                 alt={caseItem.title}
-                className="w-full h-full object-cover image-grade scale-110"
+                className="object-cover image-grade scale-110"
+                sizes="(max-width: 1024px) 100vw, 58vw"
               />
             </div>
 

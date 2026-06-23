@@ -137,12 +137,25 @@ export const metadata: Metadata = {
 // ── JSON-LD Structured Data ────────────────────────────────────────────────────
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
+  "@type": ["ProfessionalService", "LocalBusiness"],
   name: "DEVIKA SYSTEMS LTD",
   url: "https://devikasystems.co.uk",
   logo: "https://devikasystems.co.uk/logo.png",
+  image: "https://devikasystems.co.uk/og-image.jpg",
   description:
     "UK-based Micro MSP providing managed IT services, cloud management, endpoint security, 24/7 monitoring, and helpdesk support for small and medium-sized businesses.",
+  telephone: "+447356266915",
+  email: "info@devikasystems.co.uk",
+  address: {
+    "@type": "PostalAddress",
+    addressRegion: "South Wales",
+    addressCountry: "GB",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 51.4816,
+    longitude: -3.1791,
+  },
   areaServed: {
     "@type": "Country",
     name: "United Kingdom",
@@ -155,11 +168,23 @@ const jsonLd = {
     "Helpdesk Support",
     "Backup and Disaster Recovery",
   ],
-  sameAs: [
-    // Add your real social/directory profiles here, e.g.:
-    // "https://www.linkedin.com/company/devika-systems",
-    // "https://twitter.com/DevikaSystems",
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "17:30",
+    },
   ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+447356266915",
+    email: "info@devikasystems.co.uk",
+    contactType: "customer service",
+    areaServed: "GB",
+    availableLanguage: "English",
+  },
+  sameAs: [],
 };
 
 export default function RootLayout({
